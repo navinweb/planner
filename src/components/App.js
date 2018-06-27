@@ -1,30 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { TYPE } from '../consts'
 import TodoItem from './TodoItem'
 
 class App extends Component {
   render() {
-    const { todos, addTodo, removeTodo } = this.props
+    const { todos } = this.props
     return (
       <div>
         sup
-        {this._renderTodos(todos, addTodo, removeTodo)}
+        {this._renderTodos(todos)}
       </div>
     )
   }
 
-  _renderTodos(todos, addTodo, removeTodo) {
+  _renderTodos(todos) {
     return <ul>{todos.map((todo, index) => (
-      <li key={index}>
-        <TodoItem
-          title={todo.get('title')}
-          desc={todo.get('desc')}
-          onClickAdd={addTodo}
-          onClickRemove={removeTodo}
-          first={index === 0}
-          index={index}
-        />
+      <li key={todo.get('id')}>
+        <TodoItem index={index} />
       </li>
     ))}</ul>
   }
@@ -37,18 +29,7 @@ function mapToStateProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    addTodo: (payload) =>
-      dispatch({
-        type: TYPE.ADD_TODO,
-        payload,
-      }),
-    removeTodo: (payload) =>
-      dispatch({
-        type: TYPE.REMOVE_TODO,
-        payload,
-      }),
-  }
+  return {}
 }
 
 export default connect(mapToStateProps, mapDispatchToProps)(App)

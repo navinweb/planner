@@ -7,8 +7,8 @@ import { StateRecord } from './consts'
 import App from './components/App'
 
 
-const initialState = new StateRecord
-const store = createStore(reducer, initialState)
+const initialState = new StateRecord();
+const store = createStore(reducer, initialState);
 
 ReactDOM.render(
   <Provider store={store}>
