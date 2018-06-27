@@ -1,6 +1,30 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { TYPE } from '../consts'
+import styled from 'styled-components';
+
+const Title = styled.input`
+  font-size: 20px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-width: 2px;
+  margin-bottom: 2px;
+  outline: none;
+  width: 350px;
+`
+
+const Desc = styled.input`
+  font-size: 16px;
+  color: gray;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-width: 2px;
+  margin-bottom: 2px;
+  outline: none;
+  width: 350px;
+`
 
 class TodoItem extends Component {
   render() {
@@ -18,7 +42,7 @@ class TodoItem extends Component {
     return (
       <div>
         <div>{index}</div>
-        <input
+        <Title
         type = "text"
         defaultValue = {title}
         onChange={(e) => {
@@ -30,7 +54,16 @@ class TodoItem extends Component {
         }
         />
         <br/>
-        <input type="text" defaultValue={desc} />
+        <Desc
+          defaultValue={desc}
+          onChange={(e) => {
+            updateTodo({
+              index,
+              value: e.target.value,
+              field: 'desc',
+            })
+          }}
+        />
         <br/>
         {first ? (
           <button onClick={addTodo}>Add</button>
